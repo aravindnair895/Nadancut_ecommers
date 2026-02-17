@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Nadancut Admin</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <!-- Favicon -->
+    <link href="{% static 'img/favicon.ico' %}" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Roboto:wght@500;700&display=swap" rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="{% static 'lib_ad/owlcarousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
+    <link href="{% static 'lib_ad/tempusdominus/css/tempusdominus-bootstrap-4.min.css' %}" rel="stylesheet" />
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="{% static 'css_ad/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="{% static 'css_ad/style.css' %}" rel="stylesheet">
+    <style>
+        /* Make cards dark */
+        .card {
+          background-color: #191c24 !important;
+          color: white;
+          border: 1px solid #333;
+        }
+
+        /* Make inputs dark */
+        .form-control,
+        input,
+        select,
+        textarea {
+          background-color: #191c24 !important;
+          color: white !important;
+          border: 1px solid #444;
+        }
+
+        /* Placeholder color */
+        .form-control::placeholder {
+          color: #aaa;
+        }
+
+        /* Label color */
+        label {
+          color: #ccc;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid position-relative d-flex p-0">
+        <!-- Spinner Start -->
+        <div id="spinner" class="show bg-dark position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        <!-- Spinner End -->
+
+
+        <!-- Sidebar Start -->
+        {% include "admin_sidebar.html" %}
+        <!-- Sidebar End -->
+
+
+        <!-- Content Start -->
+        <div class="content">
+            <!-- Navbar Start -->
+            {% include "admin_navbar.html" %}
+            <!-- Navbar End -->
+
+          <div class="container-fluid pt-4 px-4">
+
+              <div class="d-flex align-items-center justify-content-between mb-3">
+                  <h5 class="text-danger mb-0">Inventory Report</h5>
+
+                  <a href="/export_inventory_report?s_cat={{s_cat}}&sku={{sku}}&month={{month}}&prod={{prod}}&date={{date}}"
+                     class="btn btn-danger btn-sm">
+                    ⬇ Download CSV
+                  </a>
+              </div>
+
+              <div class="row g-4">
+
+                  <!-- Search by Month -->
+                  <div class="col-lg-2 col-md-4 col-sm-6">
+                    <div class="card p-2">
+                      <form action="/search_month/" method="post">
+                        {% csrf_token %}
+                        <label class="small mb-1">Search by Month</label>
+                        <input type="month" name="month" class="form-control form-control-sm mb-1" required>
+                        <button type="submit" class="btn btn-danger btn-sm w-100">Search</button>
+                      </form>
+                    </div>
+                  </div>
+
+                  <!-- Search by Date -->
+                  <div class="col-lg-2 col-md-4 col-sm-6">
+                    <div class="card p-2">
+                      <form action="/search_date/" method="post">
+                        {% csrf_token %}
+                        <label class="small mb-1">Search by Date</label>
+                        <input type="date" name="date" class="form-control form-control-sm mb-1" required>
+                        <button type="submit" class="btn btn-danger btn-sm w-100">Search</button>
+                      </form>
+                    </div>
+                  </div>
+
+                  <!-- Search by SKU -->
+                  <div class="col-lg-2 col-md-4 col-sm-6">
+                    <div class="card p-2">
+                      <form action="/search_sku/" method="post">
+                        {% csrf_token %}
+                        <label class="small mb-1">Search by SKU</label>
+                        <input type="text" name="sku" class="form-control form-control-sm mb-1" placeholder="SKU code" required>
+                        <button type="submit" class="btn btn-danger btn-sm w-100">Search</button>
+                      </form>
+                    </div>
+                  </div>
+
+                  <!-- Search by Product -->
+                  <div class="col-lg-2 col-md-4 col-sm-6">
+                    <div class="card p-2">
+                      <form action="/search_product/" method="post">
+                        {% csrf_token %}
+                        <label class="small mb-1">Search by Product</label>
+                        <input type="text" name="product" class="form-control form-control-sm mb-1" placeholder="Product name" required>
+                        <button type="submit" class="btn btn-danger btn-sm w-100">Search</button>
+                      </form>
+                    </div>
+                  </div>
+
+                  <div class="col-lg-2 col-md-4 col-sm-6">
+                      <div class="card p-2">
+                        <form action="/search_cate/" method="post">
+                          {% csrf_token %}
+                          <label class="small mb-1">Search by Category</label>
+
+                          <select name="select_category" class="form-control form-control-sm mb-1" required>
+                            <option value="" disabled selected>-- Select --</option>
+                            {% for i in cat %}
+                              <option value="{{ i.id }}">{{ i.category }}</option>
+                            {% endfor %}
+                          </select>
+
+                          <button type="submit" class="btn btn-danger btn-sm w-100">Search</button>
+                        </form>
+                      </div>
+                    </div>
+
+                </div>
+
+
+              <div class="container-fluid pt-4 px-4">
+                  <div class="row g-4">
+
+                      <div class="col-sm-6 col-xl-3">
+                        <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
+                            <i class="fa fa-chart-line fa-3x text-primary"></i>
+                            <div class="ms-3">
+                                <p class="mb-2">Total Products</p>
+                                <h6 class="mb-0">{{ pro_count }}</h6>
+                            </div>
+                        </div>
+                    </div>
+
+                      <div class="col-sm-6 col-xl-3">
+                        <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
+                            <i class="fa fa-chart-pie fa-3x text-primary"></i>
+                            <div class="ms-3">
+                                <p class="mb-2">Total Stock</p>
+                                <h6 class="mb-0">{{ total_stock }}</h6>
+                            </div>
+                        </div>
+                    </div>
+
+                      <div class="col-sm-6 col-xl-3">
+                        <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
+                            <i class="fa fa-chart-bar fa-3x text-primary"></i>
+                            <div class="ms-3">
+                                <p class="mb-2">Monthly Stock Value</p>
+                                <h6 class="mb-0">{{ stock_value }}</h6>
+                            </div>
+                        </div>
+                    </div>
+
+                  </div>
+              </div><br>
+
+                <div class="col-12">
+                        <div class="bg-secondary rounded h-100 p-4">
+                            <h6 class="mb-4">Products</h6>
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">ID</th>
+                                            <th scope="col">Sub Categories</th>
+                                            <th scope="col">Product</th>
+                                            <th scope="col">Image</th>
+                                            <th scope="col">Slug</th>
+                                            <th scope="col">Sku Code</th>
+                                            <th scope="col">Price</th>
+                                            <th scope="col">Discount</th>
+                                            <th scope="col">Stock</th>
+                                            <th scope="col">Status</th>
+
+                                        </tr>
+                                    </thead>
+                                    {% for i in pro %}
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row">{{ forloop.counter }}</th>
+                                            <td>{{i.subcat.subcategory}}</td>
+                                            <td>{{i.prod}}</td>
+                                            <td>
+                                                {% if i.image %}
+                                                <img src="{{ i.image.url }}"
+                                                     width="100"
+                                                     height="100">
+                                                {% else %}
+                                                <p>No Image</p>
+                                                {% endif %}
+                                            <td>{{i.slug}}</td>
+                                            <td>{{i.sku_code}}</td>
+                                            <td>₹{{i.price}}</td>
+                                            <td>₹{{i.discount}}</td>
+                                            <td>{{i.stock}}</td>
+                                            <td>
+                                                {% if i.status == "available" %}
+                                                    Available
+                                                {% else %}
+                                                    Not available
+                                                {% endif %}
+                                            </td>
+
+                                        </tr>
+                                    </tbody>
+                                    {% endfor %}
+                                </table>
+                            </div>
+                        </div>
+                </div>
+            </div>
+
+
+
+
+<!-- Footer Start -->
+            <div class="container-fluid pt-4 px-4">
+                <div class="bg-secondary rounded-top p-4">
+                    <div class="row">
+                        <div class="col-12 col-sm-6 text-center text-sm-start">
+                            &copy; <a href="#">NADANCUT</a>, All Right Reserved.
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!-- Footer End -->
+        </div>
+        <!-- Content End -->
+
+
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+    </div>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{% static 'lib_ad/chart/chart.min.js' %}"></script>
+    <script src="{% static 'lib_ad/easing/easing.min.js' %}"></script>
+    <script src="{% static 'lib_ad/waypoints/waypoints.min.js' %}"></script>
+    <script src="{% static 'lib_ad/owlcarousel/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'lib_ad/tempusdominus/js/moment.min.js' %}"></script>
+    <script src="{% static 'lib_ad/tempusdominus/js/moment-timezone.min.js' %}"></script>
+    <script src="{% static 'lib_ad/tempusdominus/js/tempusdominus-bootstrap-4.min.js' %}"></script>
+
+    <!-- Template Javascript -->
+    <script src="{% static 'js_ad/main.js' %}"></script>
+</body>
+
+</html>

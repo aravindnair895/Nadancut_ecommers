@@ -1,0 +1,451 @@
+{% load static %}
+{% include "navbar.html" %}
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <div class="container">
+      <main>
+        <div class="py-5 text-center">
+          <h2>Checkout form</h2>
+        </div>
+
+        <div class="row g-5">
+          <div class="col-md-5 col-lg-4 order-md-last">
+            <h4 class="d-flex justify-content-between align-items-center mb-3">
+              <span class="text-primary">Your Order</span>
+              <span class="badge bg-primary rounded-pill">{{cart_count}}</span>
+            </h4>
+            <ul class="list-group mb-3">
+              <li class="list-group-item d-flex justify-content-between lh-sm">
+                <div>
+                  <h6 class="my-0 text-dark">{{ product.prod }}</h6>
+                  <img src="{{ product.image.url }}" width="60" height="60" style="object-fit:cover;">
+
+                </div>
+
+                <span class="text-muted">₹{{product.discount}}</span><br><br>
+                  <span class="text_muted">({{quantity}})</span>
+              </li>
+
+              <li class="list-group-item d-flex justify-content-between bg-light">
+                <div class="text-success">
+                  <h6 class="my-0">TAX</h6>
+                  <small style="color:red;">Tax amount</small>
+                </div>
+                <span style="color:red;" >₹{{tax}}</span>
+              </li>
+                {% if total_price < 500 %}
+                <li class="list-group-item d-flex justify-content-between bg-light">
+                <div class="text-success">
+                  <h6 class="my-0">Delivery</h6>
+                  <small style="color:red;">Delivery Charge</small>
+                </div>
+                <span style="color:red;" >+₹100</span>
+              </li>
+                {% else %}
+                <li class="list-group-item d-flex justify-content-between bg-light">
+                <div class="text-success">
+                  <h6 class="my-0">Delivery</h6>
+                  <small style="color:red;">Delivery Charge</small>
+                </div>
+                <span style="color:red;" >free</span>
+              </li>
+                {% endif %}
+
+              <li class="list-group-item d-flex justify-content-between">
+                <span>Total</span>
+                <strong class="total_amount">₹{{subtotal}}</strong>
+                  <input type="hidden" name="price" class="price" value="{{subtotal}}">
+              </li>
+            </ul>
+
+            <form class="card p-2" >
+              <div class="input-group">
+                <input type="text" class="form-control" id="promo_code" placeholder="Promo code">
+                <button type="button" onclick="check_coupons()" class="btn btn-secondary apply">
+                  Redeem
+                </button>
+              </div>
+            </form>
+          </div>
+          <div class="col-md-7 col-lg-8">
+            <h4 class="mb-3">Billing address</h4>
+            <form class="needs-validation" id="checkoutForm" action="/checkout_buy/{{product.id}}" method="post">{% csrf_token %}
+              <div class="row g-3">
+                <input type="hidden" name="order_id" value="{{razorpay_order_id}}">
+                <input type="hidden" name="payment_id" value="{{payment_id}}">
+                <input type="hidden" name="r_amount" id="r_amount">
+                <input type="hidden" name="amount" id="razorpay_amount" value="{{ subtotal }}">
+                <input type="hidden" name="applied_coupon" id="applied_coupon">
+                <input type="hidden" name="quantity" value="{{ quantity }}">
+
+                  {% if address %}
+                <h3 class="mb-3">Saved addresses</h3>
+                <div class="col-sm-6">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                        {% for i in address %}
+                        <label
+                            for="address{{ i.id }}"
+                            class="relative flex items-start gap-3 p-4 border rounded-md cursor-pointer
+                                   hover:border-black transition
+                                   peer-checked:border-black peer-checked:ring-2 peer-checked:ring-black">
+
+                            <!-- Radio button -->
+                            <input
+                                type="radio"
+                                name="address_id"
+                                value="{{ i.id }}"
+                                id="address{{ i.id }}"
+                                class="peer mt-1"
+                                {% if forloop.first %}checked{% endif %}
+                            >
+
+                            <!-- Address details -->
+                            <div class="text-sm leading-relaxed">
+                                <div class="font-semibold text-gray-900">
+                                    {{ i.fname }} {{ i.sname }}
+                                </div>
+
+                                <div class="text-gray-600">{{ i.address }}</div>
+                                <div class="text-gray-600">{{ i.phone }}</div>
+
+                                {% if i.landmark %}
+                                    <div class="text-gray-600">{{ i.landmark }}</div>
+                                {% endif %}
+
+                                <div class="text-gray-600">{{ i.city }}</div>
+
+                                {% if i.state != "Select State" %}
+                                    <div class="text-gray-600">{{ i.state }}</div>
+                                {% endif %}
+
+                                <div class="text-gray-600">{{ i.pc }}</div>
+                            </div>
+
+                            <!-- Counter badge -->
+                            <span class="absolute top-2 right-2 text-xs text-gray-400">
+                                {{ forloop.counter }}
+                            </span>
+                        </label>
+                        {% endfor %}
+                    </div>
+                </div>
+                  {% else %}
+                  <h3 class="mb-3">Address form</h3>
+                  <div class="col-sm-6">
+                  <label for="firstName" class="form-label">First name</label>
+                  <input type="text" class="form-control" id="firstName" placeholder="" name="fname" required>
+                  <div class="invalid-feedback">
+                    Valid first name is required.
+                  </div>
+
+
+                <div class="col-sm-6">
+                  <label for="lastName" class="form-label">Last name</label>
+                  <input type="text" class="form-control" id="lastName" placeholder="" name="sname" required>
+                  <div class="invalid-feedback">
+                    Valid last name is required.
+                  </div>
+                </div>
+
+
+                <div class="col-12">
+                  <label for="email" class="form-label">Email <span class="text-muted">(Optional)</span></label>
+                  <input type="email" class="form-control" id="email" name="email" placeholder="you@example.com">
+                  <div class="invalid-feedback">
+                    Please enter a valid email address for shipping updates.
+                  </div>
+                </div>
+
+                <div class="col-12">
+                  <label for="address" class="form-label">Address</label>
+                  <input type="text" class="form-control" id="address" name="address" placeholder="1234 Main St" required>
+                  <div class="invalid-feedback">
+                    Please enter your shipping address.
+                  </div>
+                </div>
+
+                <div class="col-12">
+                  <label for="landmark" class="form-label">Landmark(Optional)</label>
+                  <input type="text" class="form-control" id="landmark" name="landmark" placeholder="Catholic church">
+                  <div class="invalid-feedback">
+                    Please enter your shipping address.
+                  </div>
+                </div>
+
+
+                <div class="col-12">
+                  <label for="phone" class="form-label">Phone <span class="text-muted">(Optional)</span></label>
+                  <input type="number" class="form-control" id="phone" name="phone" placeholder="+91..">
+                </div>
+
+                  <div class="col-12">
+                  <label for="city" class="form-label">City</label>
+                  <input type="text" class="form-control" id="city" name="city">
+                  <div class="invalid-feedback">
+                    Please enter your shipping address.
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <label for="state" class="form-label">State</label>
+                  <select class="form-select" id="state" name="state" required>
+                    <option value="">Choose...</option>
+                    <option>Thiruvanathapuram</option>
+                      <option>Kollam</option>
+                      <option>Pathanamthitta</option>
+                      <option>Alappuzha</option>
+                      <option>Kottayam</option>
+                      <option>Idukki</option>
+                      <option>Ernakulam</option>
+                      <option>Thrissure</option>
+                      <option>Palakkad</option>
+                      <option>Malappuram</option>
+                      <option>Kozhikode</option>
+                      <option>Wayanad</option>
+                      <option>Kannoor</option>
+                      <option>Kasargod</option>
+
+                  </select>
+                  <div class="invalid-feedback">
+                    Please provide a valid state.
+                  </div>
+                </div>
+
+                <div class="col-md-3">
+                  <label for="pin" class="form-label">Pincode</label>
+                  <input type="text" class="form-control" id="pin" name="pincode" placeholder="" required>
+                  <div class="invalid-feedback">
+                    PIN code required.
+                  </div>
+                </div>
+                      {% endif %}
+
+              </div>
+
+              <hr class="my-4">
+
+              <button type="button" class="w-100 btn btn-primary btn-lg" id="payBtn">checkout</button>
+
+            </form>
+          </div>
+        </div>
+      </main>
+
+    </div>
+        <!-- Footer Start -->
+    <div class="container-fluid bg-secondary text-light footer mt-5 pt-5 wow fadeIn" data-wow-delay="0.1s">
+        <div class="container py-5">
+            <div class="row g-5">
+                <div class="col-lg-4 col-md-6">
+                    <h4 class="text-uppercase mb-4">Get In Touch</h4>
+                    <div class="d-flex align-items-center mb-2">
+                        <div class="btn-square bg-dark flex-shrink-0 me-3">
+                            <span class="fa fa-map-marker-alt text-primary"></span>
+                        </div>
+                        <span>123 Street, Kerala, India</span>
+                    </div>
+                    <div class="d-flex align-items-center mb-2">
+                        <div class="btn-square bg-dark flex-shrink-0 me-3">
+                            <span class="fa fa-phone-alt text-primary"></span>
+                        </div>
+                        <span>+91 123123132</span>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <div class="btn-square bg-dark flex-shrink-0 me-3">
+                            <span class="fa fa-envelope-open text-primary"></span>
+                        </div>
+                        <span>NADANCUT@DEMO.com</span>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <h4 class="text-uppercase mb-4">Quick Links</h4>
+                    <a class="btn btn-link" href="">About Us</a>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <h4 class="text-uppercase mb-4">Newsletter</h4>
+                    <div class="position-relative mb-4">
+                        <input class="form-control border-0 w-100 py-3 ps-4 pe-5" type="text" placeholder="Your email">
+                        <button type="button" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">SignUp</button>
+                    </div>
+                    <div class="d-flex pt-1 m-n1">
+                        <a class="btn btn-lg-square btn-dark text-primary m-1" href=""><i class="fab fa-twitter"></i></a>
+                        <a class="btn btn-lg-square btn-dark text-primary m-1" href=""><i class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-lg-square btn-dark text-primary m-1" href=""><i class="fab fa-youtube"></i></a>
+                        <a class="btn btn-lg-square btn-dark text-primary m-1" href=""><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="copyright">
+                <div class="row">
+                    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                        &copy; <a class="border-bottom" href="#">NADANCUT</a>, All Right Reserved.
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer End -->
+
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{% static 'lib/wow/wow.min.js' %}"></script>
+    <script src="{% static 'lib/easing/easing.min.js' %}"></script>
+    <script src="{% static 'lib/waypoints/waypoints.min.js' %}"></script>
+    <script src="{% static 'lib/owlcarousel/owl.carousel.min.js' %}"></script>
+
+    <!-- AOS must load AFTER all libs, BEFORE main.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
+
+    <!-- Template Javascript -->
+    <script src="{% static 'js/main.js' %}"></script>
+
+    <script>
+        (function () {
+      'use strict'
+
+      // Fetch all the forms we want to apply custom Bootstrap validation styles to
+      var forms = document.querySelectorAll('.needs-validation')
+
+      // Loop over them and prevent submission
+      Array.prototype.slice.call(forms)
+        .forEach(function (form) {
+          form.addEventListener('submit', function (event) {
+            if (!form.checkValidity()) {
+              event.preventDefault()
+              event.stopPropagation()
+            }
+
+            form.classList.add('was-validated')
+          }, false)
+        })
+    })()
+    </script>
+    <script>
+function check_coupons() {
+    let code = $("#promo_code").val();
+    let total = $(".total_amount").text().replace("₹","").trim();
+
+    $.ajax({
+        url: "/check_coupon/",
+        type: "GET",
+        data: { code: code, total: total },
+
+        success: function (response) {
+            if (response.status === "error") {
+                alert("No coupon found");
+                return;
+            }
+            if (response.status === "not_eligible") {
+                alert("Coupon not eligible");
+                return;
+            }
+            if (response.status === "used") {
+                alert("Coupon already applied");
+                return;
+            }
+
+            if (response.status === "success") {
+                // Update UI price
+                $(".total_amount").text("₹" + response.amount);
+                $(".price").val(response.amount);
+                $("#razorpay_amount").val(response.amount);
+                $("#applied_coupon").val(response.code);
+                $(".apply").prop("disabled", true);
+
+                // Create new Razorpay order with coupon price
+                $.ajax({
+                    url: "/create_razorpay_order/",
+                    type: "POST",
+                    data: {
+                        amount: response.amount,
+                        csrfmiddlewaretoken: "{{ csrf_token }}"
+                    },
+                    success: function(res){
+                        if(res.status === "success"){
+                            $("input[name='order_id']").val(res.order_id);
+                        }
+                    }
+                });
+
+                alert("Coupon applied successfully");
+            }
+        },
+        error: function () {
+            alert("Server error");
+        }
+    });
+}
+</script>
+
+<script>
+function initRazorpay(amount) {
+    let r_amount = parseInt(amount) * 100;
+
+    let options = {
+        key: "{{ razorpay_merchant_key }}",
+        amount: r_amount,
+        currency: "{{ currency }}",
+        name: "My Shop",
+        description: "Order Payment",
+        order_id: document.querySelector("input[name='order_id']").value,
+        handler: function (response) {
+            document.querySelector("input[name='payment_id']").value =
+                response.razorpay_payment_id;
+
+            document.getElementById("checkoutForm").submit();
+        }
+    };
+
+    let rzp1 = new Razorpay(options);
+    rzp1.open();
+}
+
+document.getElementById("payBtn").addEventListener("click", function () {
+    let amount = document.getElementById("razorpay_amount").value;
+    let orderId = document.querySelector("input[name='order_id']").value;
+
+    if (!amount || amount <= 0) {
+        alert("Invalid amount");
+        return;
+    }
+
+    // If order not created yet, create it first
+    if (!orderId) {
+        $.ajax({
+            url: "/create_razorpay_order/",
+            type: "POST",
+            data: {
+                amount: amount,
+                csrfmiddlewaretoken: "{{ csrf_token }}"
+            },
+            success: function(res){
+                if(res.status === "success"){
+                    $("input[name='order_id']").val(res.order_id);
+                    initRazorpay(amount);
+                } else {
+                    alert("Failed to create order");
+                }
+            }
+        });
+    } else {
+        initRazorpay(amount);
+    }
+});
+</script>
+
+
+
+
+</body>
+</html>
