@@ -65,3 +65,72 @@ Database: SQLite
 Payment Gateway: Razorpay
 
 Version Control: Git & GitHub
+
+⚙️ Installation & Setup
+
+Clone the repository:
+
+git clone https://github.com/your-username/nadancut.git
+cd nadancut
+
+
+Create virtual environment:
+
+python -m venv venv
+
+
+Activate virtual environment:
+
+# Windows
+venv\Scripts\activate
+
+# Mac/Linux
+source venv/bin/activate
+
+
+Install dependencies:
+
+pip install -r requirements.txt
+
+
+Apply migrations:
+
+python manage.py makemigrations
+python manage.py migrate
+
+
+Run the server:
+
+python manage.py runserver
+
+💡 Key Learning Outcomes
+
+Implemented AJAX-based dynamic coupon validation
+
+Integrated Razorpay with dynamic amount handling
+
+Managed decimal-to-paise conversion for payments
+
+Handled secure order capture & verification
+
+Implemented stock management after successful transactions
+
+Built complete end-to-end e-commerce workflow
+
+📌 Future Improvements
+
+Email invoice generation
+
+Order tracking system
+
+Admin dashboard analytics
+
+Product review & rating system
+
+Production deployment (AWS / DigitalOcean)
+
+👨‍💻 Author
+
+Aravind Somanath
+Electrical & Electronics Engineering Graduate
+Python Backend Developer | Django Developer
