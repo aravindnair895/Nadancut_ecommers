@@ -1,136 +1,195 @@
-🛍️ Nadancut – Django E-commerce Web Application
+🛍️ Nadancut
+Full-Stack Django E-Commerce Web Application
 
-Nadancut is a full-stack e-commerce web application built using Django.
-It includes product management, cart functionality, coupon-based discounts, secure Razorpay payment integration, and order management with stock control.
 
-🚀 Features
-🔐 User Authentication
 
-Session-based login system
 
-User-specific cart and order history
 
-🛒 Shopping & Cart System
 
-Add to cart with dynamic quantity update
 
-Real-time price calculation
 
-Tax and delivery charge logic
+
+
+
+
+📌 Overview
+
+Nadancut is a full-featured e-commerce web application built using Django.
+It supports dynamic cart management, coupon-based discounts, Razorpay payment integration, order processing, and stock management — providing a complete end-to-end online shopping experience.
+
+This project demonstrates real-world backend logic implementation including secure payment handling and dynamic price recalculations.
+
+🚀 Core Features
+🔐 Authentication System
+
+Session-based login
+
+User-specific cart & orders
+
+Secure checkout flow
+
+🛒 Cart & Checkout System
+
+Add to cart with dynamic quantity selector
+
+Real-time price updates
+
+Tax calculation (18%)
+
+Conditional delivery charge logic
 
 Buy Now functionality
 
-🎟️ Coupon System
+🎟️ Advanced Coupon System
 
-Supports percentage and fixed discount coupons
+Supports:
+
+Percentage-based discounts (e.g., 50%)
+
+Fixed amount discounts (e.g., ₹100)
 
 AJAX-based coupon validation
 
-Dynamic price update after applying coupon
+Prevents:
 
-Prevents multiple coupon usage
+Negative totals
 
-Coupon stored with order details
+Multiple coupon application
 
-💳 Razorpay Payment Integration
+Dynamically recreates Razorpay order when coupon applied
 
-Dynamic order creation using Razorpay API
+Coupon linked to order in database (ForeignKey)
 
-Recreates order when coupon modifies price
+💳 Razorpay Integration
 
-Secure payment capture handling
+Dynamic order creation
 
-Payment verification before saving order
+Paise conversion handling (₹ → paise)
 
-Invoice ID generation
+Secure payment capture
+
+Handles:
+
+Decimal rounding issues
+
+Order mismatch errors
+
+Payment ID & Order ID stored in database
+
+Invoice ID auto-generated
 
 📦 Order Management
 
-Stores order details in database
+Saves:
 
-Saves Razorpay order ID & payment ID
+User
 
-Automatically reduces product stock after successful payment
+Address
 
-Saves and manages multiple user addresses
+Product
+
+Quantity
+
+Discounted price
+
+Coupon used
+
+Payment details
+
+Auto stock deduction after successful payment
+
+Prevents stock underflow
 
 🛠️ Tech Stack
-
-Backend: Django (Python)
-
-Frontend: HTML, Bootstrap, JavaScript, jQuery
-
-Database: SQLite
-
-Payment Gateway: Razorpay
-
-Version Control: Git & GitHub
-
-⚙️ Installation & Setup
-
-Clone the repository:
-
+Layer	Technology
+Backend	Django 5.x
+Language	Python 3.12
+Frontend	HTML5, Bootstrap 5, JavaScript, jQuery
+Database	SQLite
+Payment Gateway	Razorpay API
+Version Control	Git & GitHub
+⚙️ Installation Guide
+1️⃣ Clone Repository
 git clone https://github.com/your-username/nadancut.git
 cd nadancut
 
-
-Create virtual environment:
-
+2️⃣ Create Virtual Environment
 python -m venv venv
 
-
-Activate virtual environment:
-
+3️⃣ Activate Virtual Environment
 # Windows
 venv\Scripts\activate
 
 # Mac/Linux
 source venv/bin/activate
 
-
-Install dependencies:
-
+4️⃣ Install Dependencies
 pip install -r requirements.txt
 
-
-Apply migrations:
-
+5️⃣ Apply Migrations
 python manage.py makemigrations
 python manage.py migrate
 
-
-Run the server:
-
+6️⃣ Run Server
 python manage.py runserver
 
-💡 Key Learning Outcomes
+🧠 Backend Logic Highlights
 
-Implemented AJAX-based dynamic coupon validation
+Dynamic recalculation of payable amount after coupon
 
-Integrated Razorpay with dynamic amount handling
+Order recreation in Razorpay when amount changes
 
-Managed decimal-to-paise conversion for payments
+Handling:
 
-Handled secure order capture & verification
+Float → Integer conversion errors
 
-Implemented stock management after successful transactions
+Capture mismatch issues
 
-Built complete end-to-end e-commerce workflow
+Currency validation errors
 
-📌 Future Improvements
+Secure payment verification before database write
 
-Email invoice generation
+ForeignKey coupon assignment validation
 
-Order tracking system
+📂 Project Structure (Simplified)
+nadancut/
+│
+├── models.py
+├── views.py
+├── urls.py
+├── templates/
+│   ├── buy_now.html
+│   ├── cart.html
+│   └── shop.html
+│
+├── static/
+├── manage.py
 
-Admin dashboard analytics
+📈 What This Project Demonstrates
 
-Product review & rating system
+✅ Strong Django backend logic
+✅ Real-world payment gateway integration
+✅ AJAX-based dynamic UI updates
+✅ Database integrity management
+✅ Error debugging & production-level handling
+✅ Full e-commerce workflow implementation
 
-Production deployment (AWS / DigitalOcean)
+🔮 Future Enhancements
+
+Email invoice system
+
+Order tracking
+
+Admin analytics dashboard
+
+Product reviews & ratings
+
+Deployment on AWS / DigitalOcean
+
+Production-ready PostgreSQL setup
 
 👨‍💻 Author
 
 Aravind Somanath
+Python Backend Developer
 Electrical & Electronics Engineering Graduate
-Python Backend Developer | Django Developer
