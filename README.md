@@ -156,20 +156,23 @@ Secure payment verification before database write
 
 ForeignKey coupon assignment validation
 
-📂 Project Structure (Simplified)
+## 📂 Project Structure
 
+```text
 nadancut/
 │
-├── models.py
-├── views.py
-├── urls.py
-├── templates/
+├── manage.py                # Django management script
+├── models.py                # Database models
+├── views.py                 # Business logic
+├── urls.py                  # URL routing
+│
+├── templates/               # HTML templates
 │   ├── buy_now.html
 │   ├── cart.html
 │   └── shop.html
 │
-├── static/
-├── manage.py
+├── static/                  # CSS, JS, Images
+```
 
 📈 What This Project Demonstrates
 
