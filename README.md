@@ -108,6 +108,7 @@ Frontend	HTML5, Bootstrap 5, JavaScript, jQuery
 Database	SQLite
 Payment Gateway	Razorpay API
 Version Control	Git & GitHub
+
 ⚙️ Installation Guide
 1️⃣ Clone Repository
 git clone https://github.com/your-username/nadancut.git
@@ -127,6 +128,7 @@ python manage.py makemigrations
 python manage.py migrate
 6️⃣ Run Server
 python manage.py runserver
+
 🧠 Backend Logic Highlights
 
 Dynamic recalculation of payable amount after coupon
