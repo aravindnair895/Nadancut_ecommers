@@ -157,6 +157,7 @@ Secure payment verification before database write
 ForeignKey coupon assignment validation
 
 📂 Project Structure (Simplified)
+
 nadancut/
 │
 ├── models.py
@@ -169,6 +170,7 @@ nadancut/
 │
 ├── static/
 ├── manage.py
+
 📈 What This Project Demonstrates
 
 ✅ Strong Django backend logic
