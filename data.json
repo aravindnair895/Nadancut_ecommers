@@ -1,0 +1,548 @@
+[
+{
+  "model": "my_projectAPP.tablereg",
+  "pk": 2,
+  "fields": {
+    "username": "John",
+    "email": "john@gmail.com",
+    "phone": 1234567898,
+    "password": "pbkdf2_sha256$1000000$wLmvD9raVKS8y2dhlUupl8$bx6/Qgpuq8OWMel+ji6RtuliZ0bgPZJyAnRt1cMbA+4="
+  }
+},
+{
+  "model": "my_projectAPP.tablereg",
+  "pk": 3,
+  "fields": {
+    "username": "Jose",
+    "email": "Jose@gmail.com",
+    "phone": 9745861376,
+    "password": "pbkdf2_sha256$1000000$EHIosLqaS5Q0dsjn7VdEEe$AJ+/s46MpS6nnAzGp3eR8BmLqXjedRFxEzjkZlbL/do="
+  }
+},
+{
+  "model": "my_projectAPP.tablereg",
+  "pk": 4,
+  "fields": {
+    "username": "babu",
+    "email": "babu@gmail.com",
+    "phone": 9878987898,
+    "password": "pbkdf2_sha256$1000000$uvxegXGNdsECfcLOrMNBWo$MLtroWG97pTsgxSbZDF94eycD7bH2NoJYPqxEUIVbyI="
+  }
+},
+{
+  "model": "my_projectAPP.tablecategory",
+  "pk": 9,
+  "fields": {
+    "category": "Female",
+    "image": "media/logo_for_women.png",
+    "status": "available"
+  }
+},
+{
+  "model": "my_projectAPP.tablecategory",
+  "pk": 10,
+  "fields": {
+    "category": "Male",
+    "image": "media/logo_for_men.png",
+    "status": "available"
+  }
+},
+{
+  "model": "my_projectAPP.tablesubcategory",
+  "pk": 7,
+  "fields": {
+    "category": 9,
+    "subcategory": "Skin care(female)",
+    "image": "media/logo_for_skin_protection.png",
+    "status": "available"
+  }
+},
+{
+  "model": "my_projectAPP.tablesubcategory",
+  "pk": 8,
+  "fields": {
+    "category": 10,
+    "subcategory": "Hair care(male)",
+    "image": "media/logo_for_hair_protection.png",
+    "status": "available"
+  }
+},
+{
+  "model": "my_projectAPP.tablesubcategory",
+  "pk": 9,
+  "fields": {
+    "category": 9,
+    "subcategory": "Hair care(female)",
+    "image": "media/logo_for_hair_protection_lBdY7NG.png",
+    "status": "available"
+  }
+},
+{
+  "model": "my_projectAPP.tablesubcategory",
+  "pk": 10,
+  "fields": {
+    "category": 10,
+    "subcategory": "Skin care(male)",
+    "image": "media/logo_for_skin_protection_Xj3VgaW.png",
+    "status": "available"
+  }
+},
+{
+  "model": "my_projectAPP.tableproduct",
+  "pk": 1,
+  "fields": {
+    "category": 10,
+    "subcat": 8,
+    "prod": "Nadan cut shampoo(sulpate free)",
+    "image": "media/shampoo_for_men.png",
+    "slug": "sulphate+free+shampoo",
+    "description": "NADANCUT Shampoo gently cleanses the scalp and hair, removing dirt, oil, and product buildup. It helps maintain healthy hair, adds freshness, and prepares hair for nourishment and styling.",
+    "sku_code": "1111",
+    "price": 500.0,
+    "discount": 450.0,
+    "status": "available",
+    "stock": 997,
+    "date": "2026-01-17"
+  }
+},
+{
+  "model": "my_projectAPP.tableproduct",
+  "pk": 3,
+  "fields": {
+    "category": 9,
+    "subcat": 9,
+    "prod": "Nadan cut shampoo(sulpate free)",
+    "image": "media/shampoo_for_women.png",
+    "slug": "Nadan+cut+shampoo(sulpate+free)",
+    "description": "NADANCUT Shampoo gently cleanses the scalp and hair, removing dirt, oil, and product buildup. It helps maintain healthy hair, adds freshness, and prepares hair for nourishment and styling.",
+    "sku_code": "1112",
+    "price": 500.0,
+    "discount": 450.0,
+    "status": "available",
+    "stock": 997,
+    "date": "2026-01-17"
+  }
+},
+{
+  "model": "my_projectAPP.tableproduct",
+  "pk": 4,
+  "fields": {
+    "category": 10,
+    "subcat": 10,
+    "prod": "Nadan cut skin cream",
+    "image": "media/men_skin_cream.png",
+    "slug": "Nadan+cut+skin+cream",
+    "description": "NADANCUT Skin Cream provides daily hydration and nourishment to the skin. It helps keep the skin soft, smooth, and protected from dryness while supporting a healthy skin barrier.",
+    "sku_code": "1113",
+    "price": 600.0,
+    "discount": 550.0,
+    "status": "available",
+    "stock": 1000,
+    "date": "2026-01-17"
+  }
+},
+{
+  "model": "my_projectAPP.tableproduct",
+  "pk": 5,
+  "fields": {
+    "category": 9,
+    "subcat": 7,
+    "prod": "Nadan cut skin cream",
+    "image": "media/women_skin_cream.png",
+    "slug": "Nadan+cut+skin+cream",
+    "description": "NADANCUT Skin Cream provides daily hydration and nourishment to the skin. It helps keep the skin soft, smooth, and protected from dryness while supporting a healthy skin barrier.",
+    "sku_code": "1114",
+    "price": 600.0,
+    "discount": 550.0,
+    "status": "available",
+    "stock": 999,
+    "date": "2026-01-17"
+  }
+},
+{
+  "model": "my_projectAPP.tableproduct",
+  "pk": 7,
+  "fields": {
+    "category": 10,
+    "subcat": 8,
+    "prod": "Nadan cut conditioner",
+    "image": "media/conditioner_for_men.png",
+    "slug": "Nadan+cut+conditioner",
+    "description": "NADANCUT Conditioner deeply nourishes and smoothens hair after washing. It helps reduce dryness, frizz, and tangles, leaving hair soft, manageable, and healthy-looking.",
+    "sku_code": "1115",
+    "price": 500.0,
+    "discount": 450.0,
+    "status": "available",
+    "stock": 1000,
+    "date": "2026-01-17"
+  }
+},
+{
+  "model": "my_projectAPP.tableproduct",
+  "pk": 8,
+  "fields": {
+    "category": 9,
+    "subcat": 9,
+    "prod": "Nadan cut conditioner",
+    "image": "media/conditioner_for_women.png",
+    "slug": "Nadan+cut+conditioner",
+    "description": "NADANCUT Conditioner deeply nourishes and smoothens hair after washing. It helps reduce dryness, frizz, and tangles, leaving hair soft, manageable, and healthy-looking.",
+    "sku_code": "1116",
+    "price": 500.0,
+    "discount": 450.0,
+    "status": "available",
+    "stock": 999,
+    "date": "2026-01-17"
+  }
+},
+{
+  "model": "my_projectAPP.tableproduct",
+  "pk": 9,
+  "fields": {
+    "category": 10,
+    "subcat": 8,
+    "prod": "Nadan cut Trimmer",
+    "image": "media/trimmer_for_men_MM1hYBo.png",
+    "slug": "Nadan+cut+Trimmer",
+    "description": "NADANCUT Trimmer is designed for precise and comfortable grooming. It offers smooth trimming for beard, hair, and body, ensuring a clean, sharp look with minimal skin irritation.",
+    "sku_code": "1117",
+    "price": 900.0,
+    "discount": 850.0,
+    "status": "available",
+    "stock": 1199,
+    "date": "2026-01-17"
+  }
+},
+{
+  "model": "my_projectAPP.tablecoupon",
+  "pk": 1,
+  "fields": {
+    "code": "50OFF",
+    "price": "50%"
+  }
+},
+{
+  "model": "my_projectAPP.tablecoupon",
+  "pk": 3,
+  "fields": {
+    "code": "HAPPY",
+    "price": "1000"
+  }
+},
+{
+  "model": "my_projectAPP.tablecart",
+  "pk": 3,
+  "fields": {
+    "product": 1,
+    "user": null,
+    "size": null,
+    "quantity": 1,
+    "session_key": "p7caahsc1ro177yr0g6cqig2k1zymv1t"
+  }
+},
+{
+  "model": "my_projectAPP.tablecart",
+  "pk": 4,
+  "fields": {
+    "product": 3,
+    "user": null,
+    "size": null,
+    "quantity": 1,
+    "session_key": "p7caahsc1ro177yr0g6cqig2k1zymv1t"
+  }
+},
+{
+  "model": "my_projectAPP.tablecart",
+  "pk": 5,
+  "fields": {
+    "product": 4,
+    "user": null,
+    "size": null,
+    "quantity": 1,
+    "session_key": "p7caahsc1ro177yr0g6cqig2k1zymv1t"
+  }
+},
+{
+  "model": "my_projectAPP.tablecart",
+  "pk": 6,
+  "fields": {
+    "product": 1,
+    "user": null,
+    "size": null,
+    "quantity": 1,
+    "session_key": "tmu91cw75uy7fjkjpc4lllw39lx6qvvd"
+  }
+},
+{
+  "model": "my_projectAPP.tablecart",
+  "pk": 7,
+  "fields": {
+    "product": 1,
+    "user": null,
+    "size": null,
+    "quantity": 1,
+    "session_key": "f04bj4n8es61kvmnxnyolh2ooj3kx5u1"
+  }
+},
+{
+  "model": "my_projectAPP.tablecart",
+  "pk": 34,
+  "fields": {
+    "product": 1,
+    "user": 2,
+    "size": null,
+    "quantity": 1,
+    "session_key": null
+  }
+},
+{
+  "model": "my_projectAPP.tablecart",
+  "pk": 35,
+  "fields": {
+    "product": 1,
+    "user": null,
+    "size": null,
+    "quantity": 1,
+    "session_key": "4ab95istdg0geb69pln25x5772nfxb6n"
+  }
+},
+{
+  "model": "my_projectAPP.tablecart",
+  "pk": 36,
+  "fields": {
+    "product": 4,
+    "user": 3,
+    "size": null,
+    "quantity": 1,
+    "session_key": null
+  }
+},
+{
+  "model": "my_projectAPP.tableaddress",
+  "pk": 1,
+  "fields": {
+    "user": 4,
+    "fname": "Babu",
+    "sname": "Jose",
+    "email": null,
+    "address": "1234QWERT",
+    "phone": "1234567891",
+    "landmark": "QWET",
+    "city": "GHJK",
+    "state": "Kottayam",
+    "pincode": null
+  }
+},
+{
+  "model": "my_projectAPP.tableaddress",
+  "pk": 2,
+  "fields": {
+    "user": 4,
+    "fname": "BABU",
+    "sname": "JOSE",
+    "email": "bababa@gmail.com",
+    "address": "234qeryioasf",
+    "phone": "9876543212",
+    "landmark": "ppoii",
+    "city": "poitre",
+    "state": "Wayanad",
+    "pincode": "123456"
+  }
+},
+{
+  "model": "my_projectAPP.tableaddress",
+  "pk": 3,
+  "fields": {
+    "user": 3,
+    "fname": "Jose",
+    "sname": "mon",
+    "email": null,
+    "address": "1234POIUY",
+    "phone": "9887655678",
+    "landmark": "VBNBV",
+    "city": "RETRTY",
+    "state": "Ernakulam",
+    "pincode": null
+  }
+},
+{
+  "model": "my_projectAPP.tablebuy",
+  "pk": 11,
+  "fields": {
+    "user": 4,
+    "address": 2,
+    "product": 1,
+    "quantity": 2,
+    "disc_price": 531.0,
+    "orderID": "order_S6bqrvfisPTF8j",
+    "paymentID": "pay_S6brRtrwZKMb4A",
+    "order_status": "Delivered",
+    "payment_status": "paid",
+    "payment_method": "online",
+    "invoiceID": "INVorder_S6bqrvfisPTF8j",
+    "date": "2026-01-21",
+    "coupon": 1
+  }
+},
+{
+  "model": "my_projectAPP.tablebuy",
+  "pk": 12,
+  "fields": {
+    "user": 4,
+    "address": 1,
+    "product": null,
+    "quantity": null,
+    "disc_price": 2304.0,
+    "orderID": "order_S6bss8jzVXavNe",
+    "paymentID": "pay_S6btZ4s4cwopBJ",
+    "order_status": "Ordered",
+    "payment_status": "paid",
+    "payment_method": "online",
+    "invoiceID": "INVorder_S6bss8jzVXavNe",
+    "date": "2026-01-21",
+    "coupon": 3
+  }
+},
+{
+  "model": "my_projectAPP.tablebuy",
+  "pk": 14,
+  "fields": {
+    "user": 4,
+    "address": 1,
+    "product": 5,
+    "quantity": 1,
+    "disc_price": 324.0,
+    "orderID": "order_S6uz2lTNsPiIZP",
+    "paymentID": "pay_S6uzPUFbcP00mW",
+    "order_status": "ordered",
+    "payment_status": "paid",
+    "payment_method": "online",
+    "invoiceID": "INVorder_S6uz2lTNsPiIZP",
+    "date": "2026-01-22",
+    "coupon": 1
+  }
+},
+{
+  "model": "my_projectAPP.tablebuy",
+  "pk": 15,
+  "fields": {
+    "user": 3,
+    "address": 3,
+    "product": 9,
+    "quantity": 1,
+    "disc_price": 501.0,
+    "orderID": "order_S8CnIkk9DHhhsO",
+    "paymentID": "pay_S8Cnh9Q044RdI5",
+    "order_status": "ordered",
+    "payment_status": "paid",
+    "payment_method": "online",
+    "invoiceID": "INVorder_S8CnIkk9DHhhsO",
+    "date": "2026-01-25",
+    "coupon": 1
+  }
+},
+{
+  "model": "my_projectAPP.tablebuy",
+  "pk": 16,
+  "fields": {
+    "user": 3,
+    "address": 3,
+    "product": null,
+    "quantity": null,
+    "disc_price": 593.0,
+    "orderID": "order_S8CoQDp3tyOfOw",
+    "paymentID": "pay_S8CoaiVaEsPHzC",
+    "order_status": "ordered",
+    "payment_status": "paid",
+    "payment_method": "online",
+    "invoiceID": "INVorder_S8CoQDp3tyOfOw",
+    "date": "2026-01-25",
+    "coupon": 3
+  }
+},
+{
+  "model": "my_projectAPP.tablebuy",
+  "pk": 17,
+  "fields": {
+    "user": 3,
+    "address": 3,
+    "product": 1,
+    "quantity": 1,
+    "disc_price": 531.0,
+    "orderID": "order_SA4Rfw5NcM7Aqt",
+    "paymentID": "pay_SA4RvMlNV4ae0e",
+    "order_status": "ordered",
+    "payment_status": "paid",
+    "payment_method": "online",
+    "invoiceID": "INVorder_SA4Rfw5NcM7Aqt",
+    "date": "2026-01-30",
+    "coupon": null
+  }
+},
+{
+  "model": "my_projectAPP.tablecheckoutlist",
+  "pk": 9,
+  "fields": {
+    "user": 4,
+    "product": 4,
+    "quantity": 2,
+    "buy": 12
+  }
+},
+{
+  "model": "my_projectAPP.tablecheckoutlist",
+  "pk": 10,
+  "fields": {
+    "user": 4,
+    "product": 9,
+    "quantity": 2,
+    "buy": 12
+  }
+},
+{
+  "model": "my_projectAPP.tablecheckoutlist",
+  "pk": 11,
+  "fields": {
+    "user": 3,
+    "product": 8,
+    "quantity": 2,
+    "buy": 16
+  }
+},
+{
+  "model": "my_projectAPP.tablecheckoutlist",
+  "pk": 12,
+  "fields": {
+    "user": 3,
+    "product": 7,
+    "quantity": 1,
+    "buy": 16
+  }
+},
+{
+  "model": "my_projectAPP.tablereview",
+  "pk": 2,
+  "fields": {
+    "user": 3,
+    "product": 9,
+    "image1": "media/hair_test.jpg",
+    "image2": "media/hair.jpg",
+    "rating": 5,
+    "review": "very good product",
+    "date": "2026-01-25"
+  }
+},
+{
+  "model": "my_projectAPP.tablereview",
+  "pk": 3,
+  "fields": {
+    "user": 3,
+    "product": 8,
+    "image1": "media/hair_ZDAGQjj.jpg",
+    "image2": "",
+    "rating": 4,
+    "review": "good product",
+    "date": "2026-01-25"
+  }
+}
+]

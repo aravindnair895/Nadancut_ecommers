@@ -44,7 +44,7 @@ def service(request):
 def shop(request):
     cata = TableCategory.objects.filter(status="available")
     subcat = TableSubcategory.objects.filter(status="available")
-    product=TableProduct.objects.filter(status="available")
+    product=TableProduct.objects.filter(status="available").select_related("category","subcat").only("id","prod","image","price","discount","slug","category__id","subcat__id")
     if request.session.get("userid"):
         cart_count=TableCart.objects.filter(user=request.session["userid"]).count()
     else:
@@ -54,7 +54,7 @@ def shop(request):
 def shop_subcat(request, pro_id):
     cata = TableCategory.objects.filter(status="available")
     subcat = TableSubcategory.objects.filter(status="available")
-    product = TableProduct.objects.filter(subcat_id=pro_id,status="available")
+    product = TableProduct.objects.filter(subcat_id=pro_id,status="available").select_related("category","subcat").only("id","prod","image","price","discount","slug","category__id","subcat__id")
     if request.session.get("userid"):
         cart_count=TableCart.objects.filter(user=request.session["userid"]).count()
     else:
