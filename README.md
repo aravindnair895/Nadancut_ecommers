@@ -109,25 +109,34 @@ Database	SQLite
 Payment Gateway	Razorpay API
 Version Control	Git & GitHub
 
-⚙️ Installation Guide
-1️⃣ Clone Repository
-git clone https://github.com/your-username/nadancut.git
+## 🚀 Installation Guide
+
+```bash
+# Clone the repository
+git clone https://github.com/aravindnair895/nadancut.git
+
+# Navigate into project folder
 cd nadancut
-2️⃣ Create Virtual Environment
+
+# Create virtual environment
 python -m venv venv
-3️⃣ Activate Virtual Environment
+
+# Activate virtual environment
 # Windows
 venv\Scripts\activate
 
 # Mac/Linux
 source venv/bin/activate
-4️⃣ Install Dependencies
+
+# Install dependencies
 pip install -r requirements.txt
-5️⃣ Apply Migrations
-python manage.py makemigrations
+
+# Run migrations
 python manage.py migrate
-6️⃣ Run Server
+
+# Start development server
 python manage.py runserver
+```
 
 🧠 Backend Logic Highlights
 
